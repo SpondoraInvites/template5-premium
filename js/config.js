@@ -155,6 +155,11 @@ export const config = {
       'closing.heading': 'With Heartfelt Gratitude',
       'closing.p1': 'Your presence and prayers are the greatest gift. We look forward to celebrating with you.',
       'closing.signoff': 'Ayesha & Imran',
+
+      // Footer
+      'footer.instagram': 'Spondora Invites on Instagram',
+      'footer.facebook': 'Spondora Invites on Facebook',
+      'footer.made': 'Crafted with ❤️ — Spondora Invites',
     },
 
     bn: {
@@ -267,6 +272,11 @@ export const config = {
       'closing.heading': 'আন্তরিক কৃতজ্ঞতা',
       'closing.p1': 'আপনাদের উপস্থিতি ও দোয়াই আমাদের শ্রেষ্ঠ উপহার। আপনাদের সঙ্গে আনন্দ ভাগ করে নেওয়ার অপেক্ষায় রইলাম।',
       'closing.signoff': 'আয়েশা ও ইমরান',
+
+      // Footer
+      'footer.instagram': 'ইনস্টাগ্রামে স্পন্দোরা ইনভাইটস',
+      'footer.facebook': 'ফেসবুকে স্পন্দোরা ইনভাইটস',
+      'footer.made': '❤️ দিয়ে নির্মিত — স্পন্দোরা ইনভাইটস',
     },
   },
 }

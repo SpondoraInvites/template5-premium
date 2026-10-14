@@ -499,6 +499,38 @@ blockquote p {
   color: var(--navy);
 }
 
+/* ─────────────────────────── Footer ─────────────────────────── */
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0 var(--pad-x) calc(2.4rem + env(safe-area-inset-bottom));
+  background: var(--ivory);
+}
+.socials { display: flex; gap: 1.1rem; }
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--mist);
+  border-radius: 999px;
+  color: var(--navy);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.socials a:hover,
+.socials a:focus-visible { background: var(--navy); color: var(--ivory); }
+.socials svg { width: 1.2rem; height: 1.2rem; }
+.credit {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--royal);
+}
+
 /* ─────────────────────────── Desktop ─────────────────────────── */
 
 @media (min-width: 900px) {
