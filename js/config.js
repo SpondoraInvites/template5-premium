@@ -128,7 +128,7 @@ export const config = {
       'share.copy': 'Copy link',
       'share.copied': 'Link copied!',
       'share.whatsapp': 'WhatsApp',
-      'share.facebook': 'Facebook',
+      'share.messenger': 'Messenger',
       'share.telegram': 'Telegram',
       'share.email': 'Email',
 
@@ -246,7 +246,7 @@ export const config = {
       'share.copy': 'লিংক কপি করুন',
       'share.copied': 'লিংক কপি হয়েছে!',
       'share.whatsapp': 'হোয়াটসঅ্যাপ',
-      'share.facebook': 'ফেসবুক',
+      'share.messenger': 'মেসেঞ্জার',
       'share.telegram': 'টেলিগ্রাম',
       'share.email': 'ইমেইল',
 

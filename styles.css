@@ -597,7 +597,7 @@ blockquote p {
   .map-embed iframe { height: 360px; }
 }
 
-/* Share — button opens a pill menu (copy / whatsapp / facebook / telegram / email) */
+/* Share — button opens a pill menu (copy / whatsapp / messenger / telegram / email) */
 .share { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; position: relative; }
 .share .cta {
   background: transparent;

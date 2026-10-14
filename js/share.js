@@ -1,6 +1,6 @@
 // Share — any [data-share-button] paired (via aria-controls) with a
 // [data-share-menu] opens the same channel options (copy link, WhatsApp,
-// Facebook, Telegram, email). The venue section uses one inline; a floating
+// Messenger, Telegram, email). The venue section uses one inline; a floating
 // one sticks to the bottom-right corner once the hero scrolls out of view.
 // No backend: channels compose prefilled links; copying has a legacy-http
 // fallback and localized feedback.
@@ -41,7 +41,8 @@ export function initShare() {
     return {
       copy: copyLink,
       whatsapp: () => window.open(`https://wa.me/?text=${enc(`${text()}\n${link()}`)}`, '_blank', 'noopener'),
-      facebook: () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${enc(link())}`, '_blank', 'noopener'),
+      // shortcut: deep link only opens the Messenger app (mobile); the desktop web dialog needs a registered Facebook app ID
+      messenger: () => window.open(`fb-messenger://share/?link=${enc(link())}`, '_blank', 'noopener'),
       telegram: () => window.open(`https://t.me/share/url?url=${enc(link())}&text=${enc(text())}`, '_blank', 'noopener'),
       email: () => { location.href = `mailto:?subject=${enc(text())}&body=${enc(`${text()}\n${link()}`)}` },
     }
