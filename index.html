@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B1D3A">
+  <meta name="description" content="Wedding invitation — Ayesha & Imran. With the blessings of their families.">
+  <title>Ayesha &amp; Imran — Wedding Invitation</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1D3A'/%3E%3Cg fill='%23F8F5EE'%3E%3Ccircle cx='32' cy='22' r='7'/%3E%3Ccircle cx='41' cy='29' r='7'/%3E%3Ccircle cx='38' cy='40' r='7'/%3E%3Ccircle cx='26' cy='40' r='7'/%3E%3Ccircle cx='23' cy='29' r='7'/%3E%3C/g%3E%3Ccircle cx='32' cy='31' r='5' fill='%23E8DDC5'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="modulepreload" href="js/main.js">
+
+  <!-- Boot guard: marks JS-on, but if the app modules never boot (e.g. GSAP
+       fails to load), the timeout below restores the fully readable page. -->
+  <script>
+    document.documentElement.classList.add('js')
+    window.__invitationBooted = false
+    setTimeout(function () {
+      if (!window.__invitationBooted) {
+        document.documentElement.classList.remove('js')
+        document.body.classList.remove('cover-active')
+        // The gate may already be armed if the app booted partway — unlock.
+        var inv = document.getElementById('invitation')
+        if (inv) inv.removeAttribute('inert')
+        var c = document.getElementById('cover')
+        if (c) c.remove()
+      }
+    }, 3000)
+  </script>
+</head>
+<body>
+
+  <!-- Language switch — visible over the cover (before the reveal) and afterwards -->
+  <div class="locale-toggle" role="group" aria-label="Language / ভাষা">
+    <button type="button" data-locale-btn="en" aria-pressed="true" lang="en">EN</button>
+    <button type="button" data-locale-btn="bn" aria-pressed="false" lang="bn">বাংলা</button>
+  </div>
+
+  <!-- Background music toggle — wired by js/audio.js (hidden without JS) -->
+  <button class="audio-toggle" type="button" aria-pressed="false" aria-label="Play background music">
+    <span class="audio-waves" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  </button>
+
+  <!-- Development-only replay control (enabled with ?dev=1) -->
+  <button class="dev-replay" type="button" data-i18n="control.replay"
+          data-i18n-aria="control.replayAria" aria-label="Replay the opening animation (development mode)" hidden>Replay opening</button>
+
+  <!-- ═══════════ CINEMATIC COVER ═══════════ -->
+  <div class="cover is-idle" id="cover" role="dialog" aria-labelledby="cover-title" aria-modal="false">
+    <div class="cover-panel cover-panel--top">
+      <div class="cover-mono">
+        <div class="mono-wrap">
+          <div class="mono-glow"></div>
+          <svg class="mono-art" viewBox="0 0 220 220" fill="none" aria-hidden="true">
+            <circle class="draw" cx="110" cy="110" r="92"/>
+            <circle class="draw" cx="110" cy="110" r="80"/>
+            <path class="draw" d="M76 178 C88 168 98 166 110 172 C122 166 132 168 144 178"/>
+            <path class="draw" d="M104 170 C99 162 101 155 107 150"/>
+            <path class="draw" d="M107 150 C114 145 122 147 125 154 C118 159 110 157 107 150 Z"/>
+            <circle class="dot" cx="110" cy="14" r="2.2"/>
+            <circle class="dot" cx="110" cy="206" r="2.2"/>
+          </svg>
+          <div class="mono-initials" aria-hidden="true">A&nbsp;·&nbsp;I</div>
+        </div>
+        <p class="cover-family" data-i18n="cover.familyLine">With the blessings of their families</p>
+      </div>
+
+      <svg class="sprig sprig--tl" viewBox="0 0 320 320" fill="none" aria-hidden="true">
+        <path class="draw" d="M14 314 C40 252 30 186 72 142 C108 104 158 100 198 74 C226 56 250 44 274 38"/>
+        <path class="draw" d="M96 128 C118 132 134 146 138 168"/>
+        <path class="draw" d="M58 232 C76 216 96 210 114 212 C100 228 78 236 58 232 Z"/>
+        <path class="draw" d="M76 178 C94 164 116 158 134 160 C120 176 96 184 76 178 Z"/>
+        <path class="draw" d="M120 130 C136 116 158 110 176 112 C162 128 138 136 120 130 Z"/>
+        <path class="draw" d="M44 272 C60 258 78 254 92 256 C80 270 60 276 44 272 Z"/>
+        <path class="draw" d="M150 112 C142 96 142 78 150 62 C158 78 158 96 150 112 Z"/>
+        <path class="draw" d="M226 54 C234 48 242 44 250 42"/>
+        <g class="flower">
+          <g transform="translate(278,36)">
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+            <circle class="dot" r="3"/>
+          </g>
+        </g>
+      </svg>
+
+      <svg class="sprig sprig--tr" viewBox="0 0 320 320" fill="none" aria-hidden="true">
+        <path class="draw" d="M14 314 C40 252 30 186 72 142 C108 104 158 100 198 74 C226 56 250 44 274 38"/>
+        <path class="draw" d="M96 128 C118 132 134 146 138 168"/>
+        <path class="draw" d="M58 232 C76 216 96 210 114 212 C100 228 78 236 58 232 Z"/>
+        <path class="draw" d="M76 178 C94 164 116 158 134 160 C120 176 96 184 76 178 Z"/>
+        <path class="draw" d="M120 130 C136 116 158 110 176 112 C162 128 138 136 120 130 Z"/>
+        <path class="draw" d="M44 272 C60 258 78 254 92 256 C80 270 60 276 44 272 Z"/>
+        <path class="draw" d="M150 112 C142 96 142 78 150 62 C158 78 158 96 150 112 Z"/>
+        <path class="draw" d="M226 54 C234 48 242 44 250 42"/>
+        <g class="flower">
+          <g transform="translate(278,36)">
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+            <circle class="dot" r="3"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cover-panel cover-panel--bottom"></div>
+
+    <div class="cover-inner">
+      <div class="cover-light"></div>
+      <h2 class="cover-names" id="cover-title">
+        <span class="mask"><span class="mask-line" data-i18n="cover.name1">Ayesha</span></span>
+        <span class="mask mask--and"><span class="mask-line cover-and" data-i18n="cover.and">&amp;</span></span>
+        <span class="mask"><span class="mask-line" data-i18n="cover.name2">Imran</span></span>
+      </h2>
+      <svg class="cover-flourish" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+        <path class="draw" d="M20 18 C80 8 130 28 172 18"/>
+        <path class="draw" d="M340 18 C280 8 230 28 188 18"/>
+        <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+        <circle class="dot" cx="20" cy="18" r="2.4"/>
+        <circle class="dot" cx="340" cy="18" r="2.4"/>
+      </svg>
+      <button class="cover-cue" type="button" data-i18n="cover.cue">Tap to open the invitation</button>
+    </div>
+
+    <div class="cover-petals" aria-hidden="true"></div>
+
+    <button class="cover-skip" type="button" data-i18n="control.skip"
+            data-i18n-aria="control.skipAria" aria-label="Skip the opening animation">Skip</button>
+  </div>
+
+  <!-- Ambient falling petals/leaves (spawned once the cover opens; pointer-events: none) -->
+  <div class="page-petals" aria-hidden="true"></div>
+
+  <!-- ═══════════ INVITATION ═══════════ -->
+  <main id="invitation">
+
+    <!-- 1 · Hero -->
+    <header class="section hero" id="hero">
+      <svg class="sprig sprig--tl" viewBox="0 0 320 320" fill="none" aria-hidden="true">
+        <path class="draw" d="M14 314 C40 252 30 186 72 142 C108 104 158 100 198 74 C226 56 250 44 274 38"/>
+        <path class="draw" d="M96 128 C118 132 134 146 138 168"/>
+        <path class="draw" d="M58 232 C76 216 96 210 114 212 C100 228 78 236 58 232 Z"/>
+        <path class="draw" d="M76 178 C94 164 116 158 134 160 C120 176 96 184 76 178 Z"/>
+        <path class="draw" d="M120 130 C136 116 158 110 176 112 C162 128 138 136 120 130 Z"/>
+        <path class="draw" d="M44 272 C60 258 78 254 92 256 C80 270 60 276 44 272 Z"/>
+        <path class="draw" d="M150 112 C142 96 142 78 150 62 C158 78 158 96 150 112 Z"/>
+        <path class="draw" d="M226 54 C234 48 242 44 250 42"/>
+        <path class="leaf" d="M100 150 C116 138 136 133 150 137 C142 154 118 161 100 150 Z"/>
+        <path class="leaf" d="M64 258 C80 246 100 241 114 245 C106 262 82 269 64 258 Z"/>
+        <g class="flower">
+          <g transform="translate(278,36)">
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+            <circle class="dot" r="3"/>
+          </g>
+        </g>
+      </svg>
+      <svg class="sprig sprig--br" viewBox="0 0 320 320" fill="none" aria-hidden="true">
+        <path class="draw" d="M14 314 C40 252 30 186 72 142 C108 104 158 100 198 74 C226 56 250 44 274 38"/>
+        <path class="draw" d="M96 128 C118 132 134 146 138 168"/>
+        <path class="draw" d="M58 232 C76 216 96 210 114 212 C100 228 78 236 58 232 Z"/>
+        <path class="draw" d="M76 178 C94 164 116 158 134 160 C120 176 96 184 76 178 Z"/>
+        <path class="draw" d="M120 130 C136 116 158 110 176 112 C162 128 138 136 120 130 Z"/>
+        <path class="draw" d="M44 272 C60 258 78 254 92 256 C80 270 60 276 44 272 Z"/>
+        <path class="draw" d="M150 112 C142 96 142 78 150 62 C158 78 158 96 150 112 Z"/>
+        <path class="draw" d="M226 54 C234 48 242 44 250 42"/>
+        <path class="leaf" d="M100 150 C116 138 136 133 150 137 C142 154 118 161 100 150 Z"/>
+        <path class="leaf" d="M64 258 C80 246 100 241 114 245 C106 262 82 269 64 258 Z"/>
+        <g class="flower">
+          <g transform="translate(278,36)">
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+            <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+            <circle class="dot" r="3"/>
+          </g>
+        </g>
+      </svg>
+
+      <p class="invocation" data-i18n="hero.invocation">In the name of Allah, the Most Gracious, the Most Merciful</p>
+      <svg class="divider" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+        <path d="M20 18 C80 8 130 28 172 18"/>
+        <path d="M340 18 C280 8 230 28 188 18"/>
+        <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+      </svg>
+      <p class="hero-announce" data-i18n="hero.announce">Together with their families</p>
+      <h1 class="hero-names" tabindex="-1">
+        <span data-i18n="hero.name1">Ayesha Rahman</span>
+        <span class="hero-and" data-i18n="cover.and">&amp;</span>
+        <span data-i18n="hero.name2">Imran Karim</span>
+      </h1>
+      <p class="hero-invite" data-i18n="hero.invite">joyfully invite you to celebrate their wedding</p>
+      <p class="hero-date">
+        <a class="date-note" data-href="calendar" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;dates=20261211T100000Z%2F20261211T120000Z&amp;text=Wedding%20of%20Ayesha%20%26%20Imran" target="_blank" rel="noopener" data-i18n="hero.dateNote">Save the date</a>
+        <span class="date-line"><span data-i18n-date>Friday, December 11, 2026</span> · <span data-i18n-time>4:00 PM</span></span>
+      </p>
+      <p class="scroll-cue" aria-hidden="true"><span data-i18n="scroll.cue">Scroll</span> ↓</p>
+    </header>
+
+    <!-- 2 · Our story -->
+    <section class="section" id="story" aria-labelledby="story-title">
+      <h2 id="story-title" class="mask-h"><span class="mask"><span class="mask-line" data-i18n="story.heading">Our Story</span></span></h2>
+      <svg class="divider divider--anim" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+        <path class="draw" d="M20 18 C80 8 130 28 172 18"/>
+        <path class="draw" d="M340 18 C280 8 230 28 188 18"/>
+        <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+      </svg>
+      <ol class="story">
+        <li class="moment">
+          <span class="moment-date" data-i18n="story.m1.date">2021</span>
+          <h3 data-i18n="story.m1.title">The First Hello</h3>
+          <p data-i18n="story.m1.text">A chance meeting at a family gathering — one conversation that neither of us wanted to end.</p>
+        </li>
+        <li class="moment">
+          <span class="moment-date" data-i18n="story.m2.date">2023</span>
+          <h3 data-i18n="story.m2.title">The Decision</h3>
+          <p data-i18n="story.m2.text">With our families’ blessings, we said yes to a lifetime of growing together in faith and friendship.</p>
+        </li>
+        <li class="moment">
+          <span class="moment-date" data-i18n="story.m3.date">2026</span>
+          <h3 data-i18n="story.m3.title">The Beginning</h3>
+          <p data-i18n="story.m3.text">Now, surrounded by the people we love, we prepare to begin our new life — and we want you there.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 3 · Celebration message -->
+    <section class="section" id="message" aria-labelledby="message-title">
+      <h2 id="message-title" class="mask-h"><span class="mask"><span class="mask-line" data-i18n="message.heading">A Celebration of Love</span></span></h2>
+      <svg class="divider divider--anim" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+        <path class="draw" d="M20 18 C80 8 130 28 172 18"/>
+        <path class="draw" d="M340 18 C280 8 230 28 188 18"/>
+        <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+      </svg>
+      <blockquote>
+        <p data-i18n="message.p1">“And among His signs is that He created for you spouses from among yourselves, that you may find tranquility in them; and He placed between you affection and mercy.” — Qur’an 30:21</p>
+      </blockquote>
+      <p data-i18n="message.p2">Please join us as we begin this new chapter surrounded by the people we hold dearest.</p>
+    </section>
+
+    <!-- 4 · Gallery — replace the placeholder photos in assets/gallery/ -->
+    <section class="section" id="gallery" aria-labelledby="gallery-title">
+      <h2 id="gallery-title" class="mask-h"><span class="mask"><span class="mask-line" data-i18n="gallery.heading">Moments &amp; Memories</span></span></h2>
+      <svg class="divider divider--anim" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+        <path class="draw" d="M20 18 C80 8 130 28 172 18"/>
+        <path class="draw" d="M340 18 C280 8 230 28 188 18"/>
+        <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+      </svg>
+      <p class="gallery-intro" data-i18n="gallery.intro">A few glimpses of us and of the details we love.</p>
+      <div class="gallery-grid">
+        <figure class="gallery-item"><img src="assets/gallery/gallery-1.jpg" alt="" data-i18n-alt="gallery.alt1" loading="lazy" width="900" height="900"></figure>
+        <figure class="gallery-item"><img src="assets/gallery/gallery-2.jpg" alt="" data-i18n-alt="gallery.alt2" loading="lazy" width="900" height="900"></figure>
+        <figure class="gallery-item"><img src="assets/gallery/gallery-3.jpg" alt="" data-i18n-alt="gallery.alt3" loading="lazy" width="900" height="900"></figure>
+        <figure class="gallery-item"><img src="assets/gallery/gallery-4.jpg" alt="" data-i18n-alt="gallery.alt4" loading="lazy" width="900" height="900"></figure>
+        <figure class="gallery-item"><img src="assets/gallery/gallery-5.jpg" alt="" data-i18n-alt="gallery.alt5" loading="lazy" width="900" height="900"></figure>
+        <figure class="gallery-item"><img src="assets/gallery/gallery-6.jpg" alt="" data-i18n-alt="gallery.alt6" loading="lazy" width="900" height="900"></figure>
+      </div>
+    </section>
+
+    <!-- 5 · Date, time, venue, calendar -->
+    <section class="section" id="details" aria-labelledby="details-title">
+      <h2 id="details-title" data-i18n="details.heading">When &amp; Where</h2>
+      <svg class="divider divider--anim" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+        <path class="draw" d="M20 18 C80 8 130 28 172 18"/>
+        <path class="draw" d="M340 18 C280 8 230 28 188 18"/>
+        <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+      </svg>
+      <div class="plate">
+        <dl class="details">
+        <div>
+          <dt data-i18n="details.dateLabel">Date</dt>
+          <dd data-i18n-date>Friday, December 11, 2026</dd>
+        </div>
+        <div>
+          <dt data-i18n="details.timeLabel">Time</dt>
+          <dd data-i18n-time>4:00 PM</dd>
+        </div>
+        <div>
+          <dt data-i18n="details.venueLabel">Venue</dt>
+          <dd data-i18n="details.venueName">Lakeshore Grand Ballroom</dd>
+        </div>
+        <div>
+          <dt data-i18n="details.addressLabel">Address</dt>
+          <dd data-i18n="details.venueAddress">Plot 12, Gulshan Avenue, Dhaka 1212, Bangladesh</dd>
+        </div>
+      </dl>
+      </div>
+      <a class="cta" data-href="calendar" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;dates=20261211T100000Z%2F20261211T120000Z&amp;text=Wedding%20of%20Ayesha%20%26%20Imran" rel="noopener" data-i18n="details.calendarCta">Add to Google Calendar</a>
+    </section>
+
+    <!-- 6 · Live localized countdown (falls back to the line below without JS) -->
+    <section class="section section--tint" id="countdown" aria-labelledby="countdown-title">
+      <div class="wrap">
+        <h2 id="countdown-title" data-i18n="countdown.heading">Counting Down</h2>
+        <p class="countdown-fallback" data-i18n="countdown.fallback">To the day we say Alhamdulillah</p>
+        <!-- aria-live off: digits swap every second — that must never be announced -->
+        <div class="countdown" role="timer" aria-live="off" data-i18n-aria="countdown.aria" aria-label="Countdown to the wedding ceremony">
+          <div class="cd-unit"><span class="mask"><span class="mask-line"><span class="cd-num" data-cd="days">0</span></span></span><span class="cd-label" data-i18n="countdown.days">Days</span></div>
+          <span class="cd-sep" aria-hidden="true">·</span>
+          <div class="cd-unit"><span class="mask"><span class="mask-line"><span class="cd-num" data-cd="hours">0</span></span></span><span class="cd-label" data-i18n="countdown.hours">Hours</span></div>
+          <span class="cd-sep" aria-hidden="true">·</span>
+          <div class="cd-unit"><span class="mask"><span class="mask-line"><span class="cd-num" data-cd="minutes">0</span></span></span><span class="cd-label" data-i18n="countdown.minutes">Minutes</span></div>
+          <span class="cd-sep" aria-hidden="true">·</span>
+          <div class="cd-unit"><span class="mask"><span class="mask-line"><span class="cd-num" data-cd="seconds">0</span></span></span><span class="cd-label" data-i18n="countdown.seconds">Seconds</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · Maps / venue -->
+    <section class="section" id="venue" aria-labelledby="venue-title">
+      <svg class="venue-sprig" viewBox="0 0 560 150" fill="none" aria-hidden="true">
+        <path class="stem" d="M16 122 C110 92 190 116 274 84 C352 54 448 66 540 32"/>
+        <path class="stem" d="M40 136 C150 118 260 132 380 102 C450 84 505 74 548 66"/>
+        <path class="leaf" d="M120 103 C138 90 158 86 172 91 C162 106 138 112 120 103 Z"/>
+        <path class="leaf" d="M210 100 C228 88 248 84 262 89 C252 104 228 110 210 100 Z"/>
+        <path class="leaf" d="M330 74 C348 62 368 58 382 63 C372 78 348 84 330 74 Z"/>
+        <path class="leaf" d="M420 66 C438 54 458 50 472 55 C462 70 438 76 420 66 Z"/>
+        <path class="leaf" d="M150 122 C168 112 188 110 200 116 C190 130 166 134 150 122 Z"/>
+        <path class="leaf" d="M300 116 C318 106 338 104 350 110 C340 124 316 128 300 116 Z"/>
+        <g transform="translate(540,32)">
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+          <circle class="dot" r="3"/>
+        </g>
+      </svg>
+      <h2 id="venue-title" data-i18n="venue.heading">Getting There</h2>
+      <p data-i18n="venue.intro">The celebration takes place at the heart of Gulshan, Dhaka.</p>
+      <div class="map-embed">
+        <iframe title="Map of the venue" data-i18n-title="venue.mapTitle" data-map-embed
+                src="https://www.google.com/maps?q=Lakeshore+Hotel+Gulshan+Dhaka&amp;output=embed"
+                loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a class="cta" data-href="maps" href="https://www.google.com/maps/search/?api=1&amp;query=Lakeshore+Hotel+Gulshan+Dhaka" target="_blank" rel="noopener" data-i18n="venue.mapCta">Open in Google Maps</a>
+      <div class="share">
+        <button class="cta" type="button" data-share-button aria-expanded="false" aria-controls="share-menu" data-i18n="share.button">Share this invitation</button>
+        <div class="share-menu" id="share-menu" data-share-menu hidden>
+          <button type="button" data-share="copy" data-i18n="share.copy">Copy link</button>
+          <button type="button" data-share="whatsapp" data-i18n="share.whatsapp">WhatsApp</button>
+          <button type="button" data-share="facebook" data-i18n="share.facebook">Facebook</button>
+          <button type="button" data-share="telegram" data-i18n="share.telegram">Telegram</button>
+          <button type="button" data-share="email" data-i18n="share.email">Email</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · RSVP — form composes a pre-filled WhatsApp reply (no backend) -->
+    <section class="section section--tint" id="rsvp" aria-labelledby="rsvp-title">
+      <div class="wrap">
+        <h2 id="rsvp-title" class="mask-h"><span class="mask"><span class="mask-line" data-i18n="rsvp.heading">Will You Join Us?</span></span></h2>
+        <svg class="divider divider--anim" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+          <path class="draw" d="M20 18 C80 8 130 28 172 18"/>
+          <path class="draw" d="M340 18 C280 8 230 28 188 18"/>
+          <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+        </svg>
+        <p class="rsvp-deadline" data-i18n="rsvp.deadline">Kindly respond by 20 November 2026</p>
+        <form class="rsvp-form plate" id="rsvp-form" novalidate>
+          <div class="rsvp-field">
+            <label for="rsvp-name" data-i18n="rsvp.nameLabel">Your name</label>
+            <input id="rsvp-name" name="name" type="text" autocomplete="name" required placeholder="Full name" data-i18n-placeholder="rsvp.namePlaceholder">
+            <p class="rsvp-error" data-rsvp-error hidden data-i18n="rsvp.errorName">Please tell us your name</p>
+          </div>
+          <fieldset class="rsvp-field">
+            <legend data-i18n="rsvp.attendLabel">Will you attend?</legend>
+            <div class="rsvp-choices">
+              <label><input type="radio" name="attend" value="accept" checked><span data-i18n="rsvp.accept">Joyfully accept</span></label>
+              <label><input type="radio" name="attend" value="decline"><span data-i18n="rsvp.decline">Regretfully decline</span></label>
+            </div>
+          </fieldset>
+          <div class="rsvp-field">
+            <label for="rsvp-guests" data-i18n="rsvp.guestsLabel">Number of guests</label>
+            <select id="rsvp-guests" name="guests">
+              <option value="1" data-i18n="rsvp.g1">1 guest</option>
+              <option value="2" data-i18n="rsvp.g2">2 guests</option>
+              <option value="3" data-i18n="rsvp.g3">3 guests</option>
+              <option value="4" data-i18n="rsvp.g4">4 or more guests</option>
+            </select>
+          </div>
+          <div class="rsvp-field">
+            <label for="rsvp-note" data-i18n="rsvp.noteLabel">A note for us (optional)</label>
+            <textarea id="rsvp-note" name="note" rows="3" placeholder="Wishes, dietary needs, questions…" data-i18n-placeholder="rsvp.notePlaceholder"></textarea>
+          </div>
+          <button class="cta" type="submit" data-i18n="rsvp.submit">Send via WhatsApp</button>
+          <a class="rsvp-email" data-rsvp-email href="#" rel="noopener" data-i18n="rsvp.emailAlt">or reply by email</a>
+        </form>
+      </div>
+    </section>
+
+    <!-- 9 · Closing -->
+    <section class="section closing" id="closing" aria-labelledby="closing-title">
+      <h2 id="closing-title" class="mask-h"><span class="mask"><span class="mask-line" data-i18n="closing.heading">With Heartfelt Gratitude</span></span></h2>
+      <p data-i18n="closing.p1">Your presence and prayers are the greatest gift. We look forward to celebrating with you.</p>
+      <svg class="divider divider--anim" viewBox="0 0 360 36" fill="none" aria-hidden="true">
+        <path class="draw" d="M20 18 C80 8 130 28 172 18"/>
+        <path class="draw" d="M340 18 C280 8 230 28 188 18"/>
+        <path class="flourish-diamond" d="M180 10 L188 18 L180 26 L172 18 Z"/>
+      </svg>
+      <p class="signoff"><span class="mask"><span class="mask-line" data-i18n="closing.signoff">Ayesha &amp; Imran</span></span></p>
+      <svg class="finale" viewBox="0 0 420 210" fill="none" aria-hidden="true">
+        <path class="stem" d="M210 204 C204 158 194 128 166 98"/>
+        <path class="stem" d="M210 204 C216 156 228 124 256 94"/>
+        <path class="stem" d="M210 204 C210 158 210 118 210 76"/>
+        <path class="leaf" d="M186 140 C172 128 154 124 140 128 C148 144 170 150 186 140 Z"/>
+        <path class="leaf" d="M234 138 C248 126 266 122 280 126 C272 142 250 148 234 138 Z"/>
+        <path class="leaf" d="M196 176 C182 166 164 163 152 167 C160 182 180 187 196 176 Z"/>
+        <path class="leaf" d="M224 174 C238 164 256 161 268 165 C260 180 240 185 224 174 Z"/>
+        <g transform="translate(166,98)">
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+          <circle class="dot" r="3"/>
+        </g>
+        <g transform="translate(256,94)">
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+          <circle class="dot" r="3"/>
+        </g>
+        <g transform="translate(210,76) scale(1.15)">
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(72)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(144)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(216)"/>
+          <path class="flower-petal" d="M0 0 C7 -8 9 -19 0 -30 C-9 -19 -7 -8 0 0 Z" transform="rotate(288)"/>
+          <circle class="dot" r="3"/>
+        </g>
+      </svg>
+    </section>
+
+  </main>
+
+  <!-- Floating share — appears once the hero scrolls out of view -->
+  <div class="float-share">
+    <div class="share-menu share-menu--float" id="share-menu-float" data-share-menu hidden>
+      <button type="button" data-share="copy" data-i18n="share.copy">Copy link</button>
+      <button type="button" data-share="whatsapp" data-i18n="share.whatsapp">WhatsApp</button>
+      <button type="button" data-share="facebook" data-i18n="share.facebook">Facebook</button>
+      <button type="button" data-share="telegram" data-i18n="share.telegram">Telegram</button>
+      <button type="button" data-share="email" data-i18n="share.email">Email</button>
+    </div>
+    <button class="float-share-button" type="button" data-share-button aria-expanded="false" aria-controls="share-menu-float" data-i18n-aria="share.button">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="6" cy="12" r="2.7"/>
+        <circle cx="17.5" cy="5.5" r="2.7"/>
+        <circle cx="17.5" cy="18.5" r="2.7"/>
+        <path d="M8.4 10.7 L15.1 7 M8.4 13.3 L15.1 17"/>
+      </svg>
+    </button>
+  </div>
+
+  <script src="vendor/gsap/gsap.min.js"></script>
+  <script src="vendor/gsap/ScrollTrigger.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

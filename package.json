@@ -1,0 +1,11 @@
+{
+  "name": "template5-premium",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Premium animated botanical Muslim wedding invitation — plain static HTML/CSS/JS. No build step.",
+  "scripts": {
+    "test": "node --test test/",
+    "serve": "python3 -m http.server 8125"
+  }
+}
