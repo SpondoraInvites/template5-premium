@@ -1,6 +1,5 @@
-// RSVP form — static-site pattern: no backend. Submitting composes a
-// pre-filled WhatsApp reply (config.rsvp.whatsapp); the email link is the
-// fallback channel. Name is the only required field.
+// RSVP delivery uses the configured endpoint when available, with WhatsApp
+// as the fallback. Name is the only required field.
 
 import { config } from './config.js'
 import { translate } from './i18n.js'
@@ -12,9 +11,15 @@ export function initRsvp() {
   const guests = form.elements.guests
   const note = form.elements.note
   const error = form.querySelector('[data-rsvp-error]')
-  const emailLink = form.querySelector('[data-rsvp-email]')
+  const confirmation = document.getElementById('rsvp-done')
 
-  const compose = (channel) => {
+  const finish = (message) => {
+    form.hidden = true
+    confirmation.textContent = message
+    confirmation.hidden = false
+  }
+
+  const compose = async () => {
     const name = nameInput.value.trim()
     if (!name) {
       error.hidden = false
@@ -36,19 +41,37 @@ export function initRsvp() {
     if (noteText) lines.push('', noteText)
     const body = lines.join('\n')
 
-    if (channel === 'email') {
-      location.href = `mailto:${config.rsvp.email}?subject=${encodeURIComponent(lines[0])}&body=${encodeURIComponent(body)}`
-    } else {
+    const openWhatsApp = () => {
       window.open(`https://wa.me/${config.rsvp.whatsapp}?text=${encodeURIComponent(body)}`, '_blank', 'noopener')
+    }
+
+    if (config.rsvp.endpoint) {
+      try {
+        const response = await fetch(config.rsvp.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            couple: translate('details.eventTitle', locale),
+            name,
+            attending: form.elements.attend.value,
+            guests: accept ? guests.value : '',
+            note: noteText,
+          }),
+        })
+        if (!response.ok) throw new Error(`RSVP endpoint returned ${response.status}`)
+        finish(translate('rsvp.successMessage', locale))
+      } catch {
+        openWhatsApp()
+        finish(translate('rsvp.sentMessage', locale))
+      }
+    } else {
+      openWhatsApp()
+      finish(translate('rsvp.sentMessage', locale))
     }
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault()
-    compose('whatsapp')
-  })
-  emailLink.addEventListener('click', (e) => {
-    e.preventDefault()
-    compose('email')
+    return compose()
   })
 }

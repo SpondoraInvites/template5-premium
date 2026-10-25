@@ -20,8 +20,8 @@ export const config = {
   // RSVP destinations — SAMPLE DATA. The form opens WhatsApp with a pre-filled
   // reply; the email link is the fallback channel.
   rsvp: {
+    endpoint: '', // Optional JSON RSVP endpoint; WhatsApp is used if delivery fails.
     whatsapp: '8801000000000', // SAMPLE: international format, no + or dashes
-    email: 'rsvp@example.com', // SAMPLE
   },
 
   // Background music — the user-supplied track (assets/audio/music.mp3),
@@ -148,8 +148,9 @@ export const config = {
       'rsvp.noteLabel': 'A note for us (optional)',
       'rsvp.notePlaceholder': 'Wishes, dietary needs, questions…',
       'rsvp.submit': 'Send via WhatsApp',
-      'rsvp.emailAlt': 'or reply by email',
       'rsvp.errorName': 'Please tell us your name',
+      'rsvp.successMessage': 'Thank you — your RSVP has been received.',
+      'rsvp.sentMessage': 'WhatsApp opened with your reply — press Send to deliver it.',
 
       // Closing
       'closing.heading': 'With Heartfelt Gratitude',
@@ -266,8 +267,9 @@ export const config = {
       'rsvp.noteLabel': 'আমাদের জন্য কিছু বলতে চান (ঐচ্ছিক)',
       'rsvp.notePlaceholder': 'শুভেচ্ছা, খাবারের বিশেষ চাহিদা বা প্রশ্ন…',
       'rsvp.submit': 'হোয়াটসঅ্যাপে পাঠান',
-      'rsvp.emailAlt': 'অথবা ইমেইলে জানান',
       'rsvp.errorName': 'অনুগ্রহ করে আপনার নাম লিখুন',
+      'rsvp.successMessage': 'ধন্যবাদ — আপনার উত্তরটি আমরা পেয়েছি।',
+      'rsvp.sentMessage': 'আপনার উত্তরসহ WhatsApp খোলা হয়েছে — পাঠাতে Send চাপুন।',
 
       'closing.heading': 'আন্তরিক কৃতজ্ঞতা',
       'closing.p1': 'আপনাদের উপস্থিতি ও দোয়াই আমাদের শ্রেষ্ঠ উপহার। আপনাদের সঙ্গে আনন্দ ভাগ করে নেওয়ার অপেক্ষায় রইলাম।',

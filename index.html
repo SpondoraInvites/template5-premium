@@ -366,7 +366,7 @@
       </div>
     </section>
 
-    <!-- 8 · RSVP — form composes a pre-filled WhatsApp reply (no backend) -->
+    <!-- 8 · RSVP — sends to the configured endpoint, with WhatsApp fallback -->
     <section class="section section--tint" id="rsvp" aria-labelledby="rsvp-title">
       <div class="wrap">
         <h2 id="rsvp-title" class="mask-h"><span class="mask"><span class="mask-line" data-i18n="rsvp.heading">Will You Join Us?</span></span></h2>
@@ -403,8 +403,8 @@
             <textarea id="rsvp-note" name="note" rows="3" placeholder="Wishes, dietary needs, questions…" data-i18n-placeholder="rsvp.notePlaceholder"></textarea>
           </div>
           <button class="cta" type="submit" data-i18n="rsvp.submit">Send via WhatsApp</button>
-          <a class="rsvp-email" data-rsvp-email href="#" rel="noopener" data-i18n="rsvp.emailAlt">or reply by email</a>
         </form>
+        <div class="rsvp-confirmation plate" id="rsvp-done" role="status" aria-live="polite" hidden></div>
       </div>
     </section>
 
