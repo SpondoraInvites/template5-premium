@@ -3,7 +3,7 @@
 // index.html just works). Full-screen viewer with caption, counter, arrow and
 // keyboard navigation, touch swipe, and focus management.
 
-import { config } from './config.js'
+import { INVITE_CONFIG } from '../config.js'
 import { translate } from './i18n.js'
 import { localizeNumber } from './lib/datetime.js'
 
@@ -43,7 +43,7 @@ export function initLightbox() {
     next: overlay.querySelector('[data-lb="next"]'),
   }
 
-  const lang = () => document.documentElement.lang || config.defaultLocale
+  const lang = () => document.documentElement.lang || INVITE_CONFIG.localization.default
   let index = 0
   let lastFocus = null
 

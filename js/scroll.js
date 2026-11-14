@@ -7,7 +7,7 @@
 // timeline), and always runs — the OS reduced-motion preference is
 // intentionally ignored (template choice, matching the sibling templates).
 
-import { config } from './config.js'
+import { INVITE_CONFIG } from '../config.js'
 import { countdownParts, localizeNumber } from './lib/datetime.js'
 
 const UNITS = ['days', 'hours', 'minutes', 'seconds']
@@ -28,8 +28,8 @@ export function initScroll() {
   const nums = Object.fromEntries(UNITS.map((u) => [u, document.querySelector(`.cd-num[data-cd="${u}"]`)]))
   let timer = null
   const renderCountdown = (animate) => {
-    const lang = document.documentElement.lang || config.defaultLocale
-    const parts = countdownParts(config.event.iso) // clamps past events to zeros
+    const lang = document.documentElement.lang || INVITE_CONFIG.localization.default
+    const parts = countdownParts(INVITE_CONFIG.weddingDateTime) // clamps past events to zeros
     for (const u of UNITS) {
       const el = nums[u]
       if (!el) continue

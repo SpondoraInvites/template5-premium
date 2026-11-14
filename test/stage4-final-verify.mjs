@@ -386,7 +386,7 @@ async function shotSection(page, sel, path) {
     name: document.querySelector('.mask-line').textContent,
   }))
   check('F6 BN initial render: cover controls translated',
-    initial.cue === 'আমন্ত্রণ খুলতে ট্যাপ করুন' && initial.name === 'আয়েশা', JSON.stringify(initial))
+    initial.cue === 'আমন্ত্রণ খুলতে ট্যাপ করুন' && initial.name === 'আয়েশা রহমান', JSON.stringify(initial))
 
   const dateText = await page.evaluate(() => document.querySelector('[data-i18n-date]').textContent)
   check('F6 BN date localized in Asia/Dhaka (শুক্রবার ১১ ডিসেম্বর)',

@@ -1,12 +1,12 @@
 // RSVP delivery uses the configured endpoint when available, with WhatsApp
 // as the fallback. Name is the only required field.
 
-import { config } from './config.js'
+import { INVITE_CONFIG } from '../config.js'
 import { translate } from './i18n.js'
 
 export function initRsvp() {
   const form = document.getElementById('rsvp-form')
-  if (!form) return
+  if (!form || INVITE_CONFIG.rsvp.enabled === false) return
   const nameInput = form.elements.name
   const guests = form.elements.guests
   const note = form.elements.note
@@ -27,7 +27,7 @@ export function initRsvp() {
       return
     }
     error.hidden = true
-    const locale = document.documentElement.lang || config.defaultLocale
+    const locale = document.documentElement.lang || INVITE_CONFIG.localization.default
     const accept = form.elements.attend.value === 'accept'
     const lines = [
       `${translate('details.eventTitle', locale)} — RSVP`,
@@ -42,12 +42,12 @@ export function initRsvp() {
     const body = lines.join('\n')
 
     const openWhatsApp = () => {
-      window.open(`https://wa.me/${config.rsvp.whatsapp}?text=${encodeURIComponent(body)}`, '_blank', 'noopener')
+      window.open(`https://wa.me/${INVITE_CONFIG.rsvp.whatsapp}?text=${encodeURIComponent(body)}`, '_blank', 'noopener')
     }
 
-    if (config.rsvp.endpoint) {
+    if (INVITE_CONFIG.rsvp.endpoint) {
       try {
-        const response = await fetch(config.rsvp.endpoint, {
+        const response = await fetch(INVITE_CONFIG.rsvp.endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({

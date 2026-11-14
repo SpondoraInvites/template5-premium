@@ -1,9 +1,9 @@
 // Entry point — boots only when dependencies are healthy; any failure falls
 // back to the fully readable static page (fail-safe, never traps the user).
 
-import { config } from './config.js'
+import { INVITE_CONFIG } from '../config.js'
 import { resolveLocale, readStoredLocale, persistLocale } from './lib/locale.js'
-import { applyLocale } from './i18n.js'
+import { applyLocale, LOCALES } from './i18n.js'
 import { initCover } from './cover.js'
 import { initScroll } from './scroll.js'
 import { initRsvp } from './rsvp.js'
@@ -28,8 +28,8 @@ function currentLocale() {
   return resolveLocale({
     urlParam: getUrlLocale(),
     stored: storage ? readStoredLocale(storage) : null,
-    supported: config.locales,
-    fallback: config.defaultLocale,
+    supported: LOCALES,
+    fallback: INVITE_CONFIG.localization.default,
   })
 }
 
@@ -65,7 +65,7 @@ try {
   for (const btn of document.querySelectorAll('[data-locale-btn]')) {
     btn.addEventListener('click', () => {
       const next = btn.dataset.localeBtn
-      if (!config.locales.includes(next)) return
+      if (!LOCALES.includes(next)) return
       if (storage) persistLocale(storage, next)
       applyLocale(next)
     })

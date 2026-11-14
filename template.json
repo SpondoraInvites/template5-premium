@@ -1,0 +1,10 @@
+{
+  "slug": "template5-premium",
+  "directory": "template5-premium",
+  "name": "Navy Blossom",
+  "tier": "premium",
+  "style": "module",
+  "origin": "https://template5-premium.pages.dev/",
+  "languages": ["en", "bn"],
+  "copyRendered": true
+}

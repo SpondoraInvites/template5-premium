@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
-import { config } from '../js/config.js'
+import { INVITE_CONFIG } from '../config.js'
 import { initRsvp } from '../js/rsvp.js'
 
 function setup({ fetchImpl = async () => ({ ok: true, json: async () => ({}) }) } = {}) {
@@ -34,9 +34,9 @@ function setup({ fetchImpl = async () => ({ ok: true, json: async () => ({}) }) 
 }
 
 test('RSVP posts guest answers to the configured endpoint', async () => {
-  const previousEndpoint = config.rsvp.endpoint
+  const previousEndpoint = INVITE_CONFIG.rsvp.endpoint
   let request
-  config.rsvp.endpoint = 'https://example.test/rsvp'
+  INVITE_CONFIG.rsvp.endpoint = 'https://example.test/rsvp'
   try {
     const page = setup({ fetchImpl: async (url, options) => {
       request = { url, options }
@@ -55,13 +55,13 @@ test('RSVP posts guest answers to the configured endpoint', async () => {
     assert.equal(page.confirmation.hidden, false)
     assert.equal(page.confirmation.textContent, 'Thank you — your RSVP has been received.')
   } finally {
-    config.rsvp.endpoint = previousEndpoint
+    INVITE_CONFIG.rsvp.endpoint = previousEndpoint
   }
 })
 
 test('RSVP falls back to WhatsApp when endpoint delivery fails', async () => {
-  const previousEndpoint = config.rsvp.endpoint
-  config.rsvp.endpoint = 'https://example.test/rsvp'
+  const previousEndpoint = INVITE_CONFIG.rsvp.endpoint
+  INVITE_CONFIG.rsvp.endpoint = 'https://example.test/rsvp'
   try {
     const page = setup({ fetchImpl: async () => { throw new Error('network unavailable') } })
     await page.submit()
@@ -75,7 +75,7 @@ test('RSVP falls back to WhatsApp when endpoint delivery fails', async () => {
     assert.equal(page.confirmation.hidden, false)
     assert.equal(page.confirmation.textContent, 'WhatsApp opened with your reply — press Send to deliver it.')
   } finally {
-    config.rsvp.endpoint = previousEndpoint
+    INVITE_CONFIG.rsvp.endpoint = previousEndpoint
   }
 })
 

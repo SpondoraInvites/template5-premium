@@ -12,7 +12,7 @@ const BASE = 'http://localhost:8125/index.html'
 const OUT = '/tmp/verify'
 mkdirSync(OUT, { recursive: true })
 
-const ISO = '2026-12-11T16:00:00+06:00' // mirrors js/config.js sample data
+const ISO = '2026-12-11T16:00:00+06:00' // mirrors config.js sample data
 const results = []
 function check(name, ok, detail = '') {
   results.push({ name, ok })

@@ -5,17 +5,17 @@
 // No backend: channels compose prefilled links; copying has a legacy-http
 // fallback and localized feedback.
 
-import { config } from './config.js'
+import { INVITE_CONFIG } from '../config.js'
 import { translate } from './i18n.js'
 import { formatEventDate } from './lib/datetime.js'
 
 export function initShare() {
   if (!document.querySelector('[data-share-button]')) return
 
-  const lang = () => document.documentElement.lang || config.defaultLocale
+  const lang = () => document.documentElement.lang || INVITE_CONFIG.localization.default
   const link = () => location.href
   const text = () =>
-    `${translate('details.eventTitle', lang())} — ${formatEventDate(config.event.iso, config.event.timezone, lang())}`
+    `${translate('details.eventTitle', lang())} — ${formatEventDate(INVITE_CONFIG.weddingDateTime, INVITE_CONFIG.events[0].calTz, lang())}`
   const enc = encodeURIComponent
 
   const makeActions = (menu) => {

@@ -115,7 +115,7 @@ const tapCue = (page) => page.evaluate(() => document.querySelector('.cover-cue'
     const p2 = await pw.evaluate(readPoster)
     const bnName = await pw.evaluate(() => document.querySelector('.mask-line').textContent)
     const bnCue = await pw.evaluate(() => document.querySelector('.cover-cue').textContent)
-    check(`R1 poster visible at ${w}px (BN)`, posterOk(p2) && bnName === 'আয়েশা' && bnCue.includes('ট্যাপ'),
+    check(`R1 poster visible at ${w}px (BN)`, posterOk(p2) && bnName === 'আয়েশা রহমান' && bnCue.includes('ট্যাপ'),
       JSON.stringify({ state: p2.state, cue: p2.cue, name: p2.nameLine, bnName, bnCue }))
     await pw.screenshot({ path: `${OUT}/idle-bn-${w}.png` })
     await cw.close()
@@ -270,7 +270,7 @@ const tapCue = (page) => page.evaluate(() => document.querySelector('.cover-cue'
     pressed: document.querySelector('[data-locale-btn="bn"]').getAttribute('aria-pressed'),
   }))
   check('R3 BN at idle re-labels cover instantly and stays idle',
-    bn.state === 'idle' && bn.coverUp && bn.lang === 'bn' && bn.name === 'আয়েশা' &&
+    bn.state === 'idle' && bn.coverUp && bn.lang === 'bn' && bn.name === 'আয়েশা রহমান' &&
     bn.nameVisible > 0.9 && bn.cue.includes('ট্যাপ') && bn.pressed === 'true', JSON.stringify(bn))
   await page.screenshot({ path: `${OUT}/idle-bn-switch-390.png` })
   await sleep(1500)
@@ -380,7 +380,7 @@ const tapCue = (page) => page.evaluate(() => document.querySelector('.cover-cue'
     coverName: document.querySelector('.mask-line')?.textContent,
   }))
   check('stored locale persists across reload (bn, no query param)',
-    persisted.lang === 'bn' && persisted.coverName === 'আয়েশা' && persisted.title.includes('ইমরান'), JSON.stringify(persisted))
+    persisted.lang === 'bn' && persisted.coverName === 'আয়েশা রহমান' && persisted.title.includes('ইমরান'), JSON.stringify(persisted))
   await context.close()
 }
 

@@ -4,13 +4,13 @@
 // localStorage. The browser's autoplay rules are respected: play() is only
 // ever attempted from inside a user-gesture call stack.
 
-import { config } from './config.js'
+import { INVITE_CONFIG } from '../config.js'
 import { translate } from './i18n.js'
 
 const PREF_KEY = 'invitation:audio'
 
 export function initAudio() {
-  if (!config.audio?.ready || !config.audio.src) return
+  if (!INVITE_CONFIG.music?.enabled || !INVITE_CONFIG.music.src) return
   const toggle = document.querySelector('.audio-toggle')
   if (!toggle) return
 
@@ -19,13 +19,13 @@ export function initAudio() {
   // Default is on — but nothing plays until the visitor's first gesture.
   let desired = stored === 'off' ? 'off' : 'on'
 
-  const audio = new Audio(config.audio.src)
+  const audio = new Audio(INVITE_CONFIG.music.src)
   audio.loop = true
   audio.preload = 'none'
   audio.volume = 0
   document.body.appendChild(audio)
 
-  const target = config.audio.volume ?? 0.5
+  const target = INVITE_CONFIG.music.volume ?? 0.5
   const { gsap } = window
 
   const render = () => {
@@ -37,7 +37,7 @@ export function initAudio() {
     toggle.setAttribute('title', label)
   }
 
-  const lang = () => document.documentElement.lang || config.defaultLocale
+  const lang = () => document.documentElement.lang || INVITE_CONFIG.localization.default
 
   const fadeTo = (value, then) => {
     if (gsap) gsap.to(audio, { volume: value, duration: 0.9, ease: 'power1.inOut', overwrite: true, onComplete: then })
