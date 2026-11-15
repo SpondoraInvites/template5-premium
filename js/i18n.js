@@ -97,7 +97,7 @@ export function enFromConfig(cfg) {
 
     // RSVP
     'rsvp.heading': 'Will You Join Us?',
-    'rsvp.deadline': cfg.rsvp.deadline,
+    'rsvp.deadline': cfg.rsvp.deadline ? `Kindly respond by ${cfg.rsvp.deadline}` : '',
     'rsvp.nameLabel': 'Your name',
     'rsvp.namePlaceholder': 'Full name',
     'rsvp.attendLabel': 'Will you attend?',
@@ -136,7 +136,73 @@ export function enFromConfig(cfg) {
   return en
 }
 
-const DICTIONARIES = { en: enFromConfig(INVITE_CONFIG), ...INVITE_TRANSLATIONS }
+/* A language block is a nested mirror of the config (content) plus `ui` (fixed
+   interface strings). Compose the same flat keys enFromConfig emits. */
+export function bnFromConfig(bn) {
+  const {
+    nameJoin = '&',
+    docTitleSuffix = '',
+    rsvpDeadline = '{deadline}',
+    ...ui
+  } = bn.ui ?? {}
+  const names = [bn.couple?.name1, bn.couple?.name2].filter(Boolean).join(` ${nameJoin} `)
+  const [verse, ...rest] = (bn.welcome?.inviteLine ?? '').split('\n\n')
+  const dict = {
+    ...ui,
+    'doc.title': names + docTitleSuffix,
+
+    // Cover
+    'cover.familyLine': bn.welcome?.eyebrow ?? '',
+    'cover.name1': bn.couple?.name1 ?? '',
+    'cover.name2': bn.couple?.name2 ?? '',
+    'cover.and': nameJoin,
+
+    // Hero
+    'hero.invocation': bn.blessing ?? '',
+    'hero.name1': bn.couple?.name1 ?? '',
+    'hero.name2': bn.couple?.name2 ?? '',
+    'hero.parents1': bn.welcome?.parents1 ?? '',
+    'hero.parents2': bn.welcome?.parents2 ?? '',
+
+    // Celebration message
+    'message.p1': verse,
+    'message.p2': rest.join('\n\n'),
+
+    // Details
+    'details.venueName': bn.venue?.name ?? '',
+    'details.venueAddress': bn.venue?.address ?? '',
+    'details.eventTitle': bn.events?.[0]?.name ?? '',
+
+    // Countdown
+    'countdown.fallback': bn.countdownNote ?? '',
+
+    // RSVP
+    'rsvp.deadline': bn.rsvp?.deadline
+      ? rsvpDeadline.replace('{deadline}', bn.rsvp.deadline)
+      : '',
+
+    // Closing
+    'closing.p1': bn.closing ?? '',
+    'closing.signoff': names,
+
+    // Footer
+    'footer.made': bn.credit ?? '',
+  }
+  bn.story?.chapters?.forEach((chapter, i) => {
+    dict[`story.m${i + 1}.date`] = chapter.label
+    dict[`story.m${i + 1}.title`] = chapter.title
+    dict[`story.m${i + 1}.text`] = chapter.text
+  })
+  bn.gallery?.photos?.forEach((photo, i) => {
+    dict[`gallery.alt${i + 1}`] = photo.alt
+  })
+  return dict
+}
+
+const DICTIONARIES = { en: enFromConfig(INVITE_CONFIG) }
+for (const [locale, tree] of Object.entries(INVITE_TRANSLATIONS)) {
+  DICTIONARIES[locale] = bnFromConfig(tree)
+}
 
 export function translate(key, locale) {
   return DICTIONARIES[locale]?.[key] ?? DICTIONARIES[INVITE_CONFIG.localization.default][key] ?? ''
@@ -196,11 +262,7 @@ export function applyLocale(locale) {
   const calTitle = translate('details.eventTitle', locale)
   const location = `${translate('details.venueName', locale)}, ${translate('details.venueAddress', locale)}`
   for (const a of document.querySelectorAll('[data-href="calendar"]')) {
-    a.href = buildGoogleCalendarUrl({
-      event: { iso: event.calStart, endIso: event.calEnd },
-      title: calTitle,
-      location,
-    })
+    a.href = buildGoogleCalendarUrl({ event, title: calTitle, location })
   }
   for (const a of document.querySelectorAll('[data-href="maps"]')) {
     a.href = maps.search

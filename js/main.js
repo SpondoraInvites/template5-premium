@@ -47,9 +47,19 @@ try {
   if (window.ScrollTrigger && gsap.registerPlugin) gsap.registerPlugin(ScrollTrigger)
 
   const storage = safeStorage()
-  const locale = currentLocale()
-  if (storage) persistLocale(storage, locale)
+  const localization = INVITE_CONFIG.localization ?? {}
+  const languagesEnabled = localization.enabled !== false
+  const locale = languagesEnabled ? currentLocale() : localization.default
+  if (languagesEnabled && storage) persistLocale(storage, locale)
   applyLocale(locale)
+  if (!languagesEnabled) {
+    // No language switch, and a stored or linked `bn` cannot turn it back on.
+    const toggle = document.querySelector('.locale-toggle')
+    if (toggle) {
+      toggle.hidden = true
+      toggle.setAttribute('aria-hidden', 'true')
+    }
+  }
 
   const coverCtl = initCover()
   // Scroll choreography guards itself: any internal failure just leaves the

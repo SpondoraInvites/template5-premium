@@ -1,16 +1,23 @@
-// Google Calendar "add event" link builder (all times converted to UTC).
+// Google Calendar "add event" link builder. Times stay local (calDate + HH:MM)
+// and the event zone travels as `ctz`, so Google places the event correctly.
 
-function utcCompact(iso) {
-  return new Date(iso).toISOString().replace(/[-:]|\.\d{3}/g, '')
+function compactDate(calDate) {
+  return calDate.replace(/-/g, '')
+}
+
+function compactTime(hhmm) {
+  return hhmm.replace(':', '') + '00'
 }
 
 export function buildGoogleCalendarUrl({ event, title, location, details = '' }) {
+  const day = compactDate(event.calDate)
   const params = new URLSearchParams({
     action: 'TEMPLATE',
     text: title,
-    dates: `${utcCompact(event.iso)}/${utcCompact(event.endIso)}`,
+    dates: `${day}T${compactTime(event.calStart)}/${day}T${compactTime(event.calEnd)}`,
     location,
     details,
   })
+  if (event.calTz) params.set('ctz', event.calTz)
   return `https://calendar.google.com/calendar/render?${params.toString()}`
 }

@@ -42,7 +42,8 @@ const INVITE_CONFIG = {
   countdownNote: 'To the day we say Alhamdulillah',
 
   /* ── Event ──────────────────────────────────────────────────────────────── */
-  // One ceremony. cal* feed the Google Calendar link; date/time are display.
+  // One ceremony. calDate is YYYY-MM-DD, calStart/calEnd are HH:MM (24h);
+  // they feed the Google Calendar link. date/time are display.
   events: [
     {
       tag: 'Wedding',
@@ -55,8 +56,8 @@ const INVITE_CONFIG = {
       address: 'Plot 12, Gulshan Avenue, Dhaka 1212, Bangladesh',
       mapQuery: 'Lakeshore Hotel Gulshan Dhaka',
       calDate: '2026-12-11',
-      calStart: '2026-12-11T16:00:00+06:00',
-      calEnd: '2026-12-11T18:00:00+06:00',
+      calStart: '16:00',
+      calEnd: '18:00',
       calTz: 'Asia/Dhaka',
     },
   ],
@@ -113,7 +114,7 @@ const INVITE_CONFIG = {
   // optional JSON destination used first when set.
   rsvp: {
     enabled: true,
-    deadline: 'Kindly respond by 20 November 2026',
+    deadline: '20 November 2026', // display date; js/i18n.js adds the sentence
     whatsapp: '8801000000000', // SAMPLE: international format, no + or dashes
     endpoint: '',
   },
@@ -141,136 +142,192 @@ const INVITE_CONFIG = {
 }
 
 /* ── Translations ───────────────────────────────────────────────────────────
-   Keys mirror the flat ui keys js/i18n.js derives from INVITE_CONFIG for
-   English. Anything omitted here falls back to English. */
+   Bengali is a nested mirror of INVITE_CONFIG (content) plus one `ui` block for
+   the fixed interface strings. js/i18n.js turns it into the same flat keys it
+   derives for English; anything omitted here falls back to English. */
 const INVITE_TRANSLATIONS = {
   bn: {
-    'doc.title': 'আয়েশা ও ইমরান — বিয়ের আমন্ত্রণ',
+    couple: { name1: 'আয়েশা রহমান', name2: 'ইমরান করিম' },
 
-    'cover.familyLine': 'উভয় পরিবারের আশীর্বাদে',
-    'cover.name1': 'আয়েশা রহমান',
-    'cover.name2': 'ইমরান করিম',
-    'cover.and': 'ও',
-    'cover.cue': 'আমন্ত্রণ খুলতে ট্যাপ করুন',
-    'control.skip': 'বাদ দিন',
-    'control.skipAria': 'শুরুর অ্যানিমেশন বাদ দিন',
-    'control.replay': 'আবার দেখুন',
-    'control.replayAria': 'শুরুর অ্যানিমেশন আবার চালান (ডেভেলপমেন্ট মোড)',
+    blessing: 'পরম করুণাময় অসীম দয়ালু আল্লাহর নামে',
 
-    'hero.invocation': 'পরম করুণাময় অসীম দয়ালু আল্লাহর নামে',
-    'hero.announce': 'উভয় পরিবারের পক্ষ থেকে',
-    'hero.invite': 'আপনাদের বিয়ের অনুষ্ঠানে সাদরে আমন্ত্রণ জানাচ্ছি',
-    'hero.name1': 'আয়েশা রহমান',
-    'hero.name2': 'ইমরান করিম',
-    'hero.parents1': 'মি. রফিক রহমান ও মিসেস নাসরিন রহমানের কন্যা',
-    'hero.parents2': 'মি. কামাল করিম ও মিসেস শিরিন করিমের পুত্র',
-    'hero.dateNote': 'তারিখ মনে রাখুন',
-    'scroll.cue': 'স্ক্রল করুন',
+    welcome: {
+      eyebrow: 'উভয় পরিবারের আশীর্বাদে',
+      parents1: 'মি. রফিক রহমান ও মিসেস নাসরিন রহমানের কন্যা',
+      parents2: 'মি. কামাল করিম ও মিসেস শিরিন করিমের পুত্র',
+      inviteLine:
+        '“তিনিই তোমাদের জন্য তোমাদের মধ্য থেকেই স্ত্রী সৃষ্টি করেছেন, যাতে তোমরা তাদের দ্বারা প্রশান্তি লাভ করো; এবং তোমাদের মধ্যে ভালোবাসা ও দয়া স্থাপন করেছেন।” — আল-কুরআন ৩০:২১' +
+        '\n\n' +
+        'প্রিয়জনদের সান্নিধ্যে আমাদের নতুন জীবনের সূচনার আনন্দ ভাগাভাগি করে নিতে আপনাদের সাদরে আমন্ত্রণ।',
+    },
 
-    'story.heading': 'আমাদের গল্প',
-    'story.m1.date': '২০২১',
-    'story.m1.title': 'প্রথম সাক্ষাৎ',
-    'story.m1.text': 'এক পারিবারিক আড্ডায় হঠাৎ দেখা — এমন এক কথা, যা শেষ করতে দুজনেরই ভালো লাগছিল না।',
-    'story.m2.date': '২০২৩',
-    'story.m2.title': 'সিদ্ধান্ত',
-    'story.m2.text': 'পরিবারের আশীর্বাদে ঈমান ও বন্ধুত্বের সঙ্গে জীবন গড়ে তোলার সিদ্ধান্ত নিলাম আমরা।',
-    'story.m3.date': '২০২৬',
-    'story.m3.title': 'নতুন শুরু',
-    'story.m3.text': 'এখন প্রিয়জনদের মাঝে নতুন জীবনের প্রস্তুতি — এই আনন্দের দিনে আপনাদের পাশে চাই।',
+    dateDisplay: 'শুক্রবার, ১১ ডিসেম্বর ২০২৬',
+    city: 'ঢাকা, বাংলাদেশ',
+    countdownNote: 'আমাদের বিশেষ দিন পর্যন্ত',
 
-    'message.heading': 'ভালোবাসার আয়োজন',
-    'message.p1': '“তিনিই তোমাদের জন্য তোমাদের মধ্য থেকেই স্ত্রী সৃষ্টি করেছেন, যাতে তোমরা তাদের দ্বারা প্রশান্তি লাভ করো; এবং তোমাদের মধ্যে ভালোবাসা ও দয়া স্থাপন করেছেন।” — আল-কুরআন ৩০:২১',
-    'message.p2': 'প্রিয়জনদের সান্নিধ্যে আমাদের নতুন জীবনের সূচনার আনন্দ ভাগাভাগি করে নিতে আপনাদের সাদরে আমন্ত্রণ।',
+    events: [
+      {
+        tag: 'বিয়ে',
+        name: 'আয়েশা ও ইমরানের বিয়ের অনুষ্ঠান',
+        tagline: '',
+        date: 'শুক্রবার, ১১ ডিসেম্বর ২০২৬',
+        time: 'বিকাল ৪:০০',
+        venue: 'লেকশোর গ্র্যান্ড বলরুম',
+        address: 'প্লট ১২, গুলশান অ্যাভিনিউ, ঢাকা ১২১২, বাংলাদেশ',
+      },
+    ],
 
-    'gallery.heading': 'মুহূর্ত ও স্মৃতি',
-    'gallery.intro': 'আমাদের কিছু মুহূর্ত আর প্রিয় খুঁটিনাটির ঝলক।',
-    'gallery.alt1': 'নেভি ফিতাসহ অফদুধ সাদা গোলাপ ও নীল ডেলফিনিয়ামের ফুলের তোড়া',
-    'gallery.alt2': 'অফদুধ রেশমের ওপর সোনালি বিয়ের আংটি ও নীল ফুল',
-    'gallery.alt3': 'নেভি ফিতা ও ফুল সাজানো বিয়ের আমন্ত্রণ কার্ড',
-    'gallery.alt4': 'সাদা হাইড্রেঞ্জা ও নীল ডেলফিনিয়ামের সাজ',
-    'gallery.alt5': 'খেজুর ও নীল ফুলসহ অলংকৃত কাপ',
-    'gallery.alt6': 'সাদা পাপড়ি ও নীল ফুলে সাজানো অনুষ্ঠানের পথ',
+    venue: {
+      name: 'লেকশোর গ্র্যান্ড বলরুম',
+      address: 'প্লট ১২, গুলশান অ্যাভিনিউ, ঢাকা ১২১২, বাংলাদেশ',
+    },
 
-    'lightbox.close': 'বন্ধ করুন',
-    'lightbox.prev': 'আগের ছবি',
-    'lightbox.next': 'পরের ছবি',
+    story: {
+      chapters: [
+        {
+          label: '২০২১',
+          title: 'প্রথম সাক্ষাৎ',
+          text: 'এক পারিবারিক আড্ডায় হঠাৎ দেখা — এমন এক কথা, যা শেষ করতে দুজনেরই ভালো লাগছিল না।',
+        },
+        {
+          label: '২০২৩',
+          title: 'সিদ্ধান্ত',
+          text: 'পরিবারের আশীর্বাদে ঈমান ও বন্ধুত্বের সঙ্গে জীবন গড়ে তোলার সিদ্ধান্ত নিলাম আমরা।',
+        },
+        {
+          label: '২০২৬',
+          title: 'নতুন শুরু',
+          text: 'এখন প্রিয়জনদের মাঝে নতুন জীবনের প্রস্তুতি — এই আনন্দের দিনে আপনাদের পাশে চাই।',
+        },
+      ],
+    },
 
-    'audio.play': 'ব্যাকগ্রাউন্ড মিউজিক চালু করুন',
-    'audio.pause': 'ব্যাকগ্রাউন্ড মিউজিক বন্ধ করুন',
+    gallery: {
+      photos: [
+        { alt: 'নেভি ফিতাসহ অফদুধ সাদা গোলাপ ও নীল ডেলফিনিয়ামের ফুলের তোড়া' },
+        { alt: 'অফদুধ রেশমের ওপর সোনালি বিয়ের আংটি ও নীল ফুল' },
+        { alt: 'নেভি ফিতা ও ফুল সাজানো বিয়ের আমন্ত্রণ কার্ড' },
+        { alt: 'সাদা হাইড্রেঞ্জা ও নীল ডেলফিনিয়ামের সাজ' },
+        { alt: 'খেজুর ও নীল ফুলসহ অলংকৃত কাপ' },
+        { alt: 'সাদা পাপড়ি ও নীল ফুলে সাজানো অনুষ্ঠানের পথ' },
+      ],
+    },
 
-    'details.heading': 'কখন ও কোথায়',
-    'details.dateLabel': 'তারিখ',
-    'details.timeLabel': 'সময়',
-    'details.venueLabel': 'স্থান',
-    'details.addressLabel': 'ঠিকানা',
-    'details.venueName': 'লেকশোর গ্র্যান্ড বলরুম',
-    'details.venueAddress': 'প্লট ১২, গুলশান অ্যাভিনিউ, ঢাকা ১২১২, বাংলাদেশ',
-    'details.calendarCta': 'গুগল ক্যালেন্ডারে যোগ করুন',
-    'details.eventTitle': 'আয়েশা ও ইমরানের বিয়ের অনুষ্ঠান',
+    closing: 'আপনাদের উপস্থিতি ও দোয়াই আমাদের শ্রেষ্ঠ উপহার। আপনাদের সঙ্গে আনন্দ ভাগ করে নেওয়ার অপেক্ষায় রইলাম।',
+    credit: '❤️ দিয়ে নির্মিত — স্পন্দোরা ইনভাইটস',
 
-    'countdown.heading': 'বাকি সময়',
-    'countdown.fallback': 'আমাদের বিশেষ দিন পর্যন্ত',
-    'countdown.days': 'দিন',
-    'countdown.hours': 'ঘণ্টা',
-    'countdown.minutes': 'মিনিট',
-    'countdown.seconds': 'সেকেন্ড',
-    'countdown.aria': 'বিয়ের অনুষ্ঠানের বাকি সময়',
+    rsvp: { deadline: '২০ নভেম্বর ২০২৬' },
 
-    'venue.heading': 'কীভাবে যাবেন',
-    'venue.intro': 'অনুষ্ঠানটি অনুষ্ঠিত হবে ঢাকার গুলশানের প্রাণকেন্দ্রে।',
-    'venue.mapCta': 'গুগল ম্যাপে খুলুন',
-    'venue.mapTitle': 'ভেন্যুর ম্যাপ',
+    /* Fixed interface strings. Dotted keys are allowed here — `ui` is the one
+       place that mirrors the flat keys the page asks for. */
+    ui: {
+      nameJoin: 'ও',
+      docTitleSuffix: ' — বিয়ের আমন্ত্রণ',
+      rsvpDeadline: 'অনুগ্রহ করে {deadline}-এর মধ্যে জানান',
 
-    'share.button': 'আমন্ত্রণটি শেয়ার করুন',
-    'share.copy': 'লিংক কপি করুন',
-    'share.copied': 'লিংক কপি হয়েছে!',
-    'share.whatsapp': 'হোয়াটসঅ্যাপ',
-    'share.messenger': 'মেসেঞ্জার',
-    'share.telegram': 'টেলিগ্রাম',
-    'share.email': 'ইমেইল',
+      'cover.cue': 'আমন্ত্রণ খুলতে ট্যাপ করুন',
+      'control.skip': 'বাদ দিন',
+      'control.skipAria': 'শুরুর অ্যানিমেশন বাদ দিন',
+      'control.replay': 'আবার দেখুন',
+      'control.replayAria': 'শুরুর অ্যানিমেশন আবার চালান (ডেভেলপমেন্ট মোড)',
 
-    'rsvp.heading': 'আপনি কি আসছেন?',
-    'rsvp.deadline': 'অনুগ্রহ করে ২০ নভেম্বর ২০২৬-এর মধ্যে জানান',
-    'rsvp.nameLabel': 'আপনার নাম',
-    'rsvp.namePlaceholder': 'পূর্ণ নাম',
-    'rsvp.attendLabel': 'আপনি কি আসবেন?',
-    'rsvp.accept': 'আসছি, ইন শা আল্লাহ',
-    'rsvp.decline': 'আসতে পারব না',
-    'rsvp.guestsLabel': 'অতিথির সংখ্যা',
-    'rsvp.g1': '১ জন',
-    'rsvp.g2': '২ জন',
-    'rsvp.g3': '৩ জন',
-    'rsvp.g4': '৪ বা তার বেশি',
-    'rsvp.noteLabel': 'আমাদের জন্য কিছু বলতে চান (ঐচ্ছিক)',
-    'rsvp.notePlaceholder': 'শুভেচ্ছা, খাবারের বিশেষ চাহিদা বা প্রশ্ন…',
-    'rsvp.submit': 'হোয়াটসঅ্যাপে পাঠান',
-    'rsvp.errorName': 'অনুগ্রহ করে আপনার নাম লিখুন',
-    'rsvp.successMessage': 'ধন্যবাদ — আপনার উত্তরটি আমরা পেয়েছি।',
-    'rsvp.sentMessage': 'আপনার উত্তরসহ WhatsApp খোলা হয়েছে — পাঠাতে Send চাপুন।',
+      'hero.announce': 'উভয় পরিবারের পক্ষ থেকে',
+      'hero.invite': 'আপনাদের বিয়ের অনুষ্ঠানে সাদরে আমন্ত্রণ জানাচ্ছি',
+      'hero.dateNote': 'তারিখ মনে রাখুন',
+      'scroll.cue': 'স্ক্রল করুন',
 
-    'closing.heading': 'আন্তরিক কৃতজ্ঞতা',
-    'closing.p1': 'আপনাদের উপস্থিতি ও দোয়াই আমাদের শ্রেষ্ঠ উপহার। আপনাদের সঙ্গে আনন্দ ভাগ করে নেওয়ার অপেক্ষায় রইলাম।',
-    'closing.signoff': 'আয়েশা ও ইমরান',
+      'story.heading': 'আমাদের গল্প',
 
-    'footer.instagram': 'ইনস্টাগ্রামে স্পন্দোরা ইনভাইটস',
-    'footer.facebook': 'ফেসবুকে স্পন্দোরা ইনভাইটস',
-    'footer.made': '❤️ দিয়ে নির্মিত — স্পন্দোরা ইনভাইটস',
+      'message.heading': 'ভালোবাসার আয়োজন',
+
+      'gallery.heading': 'মুহূর্ত ও স্মৃতি',
+      'gallery.intro': 'আমাদের কিছু মুহূর্ত আর প্রিয় খুঁটিনাটির ঝলক।',
+
+      'lightbox.close': 'বন্ধ করুন',
+      'lightbox.prev': 'আগের ছবি',
+      'lightbox.next': 'পরের ছবি',
+
+      'audio.play': 'ব্যাকগ্রাউন্ড মিউজিক চালু করুন',
+      'audio.pause': 'ব্যাকগ্রাউন্ড মিউজিক বন্ধ করুন',
+
+      'details.heading': 'কখন ও কোথায়',
+      'details.dateLabel': 'তারিখ',
+      'details.timeLabel': 'সময়',
+      'details.venueLabel': 'স্থান',
+      'details.addressLabel': 'ঠিকানা',
+      'details.calendarCta': 'গুগল ক্যালেন্ডারে যোগ করুন',
+
+      'countdown.heading': 'বাকি সময়',
+      'countdown.days': 'দিন',
+      'countdown.hours': 'ঘণ্টা',
+      'countdown.minutes': 'মিনিট',
+      'countdown.seconds': 'সেকেন্ড',
+      'countdown.aria': 'বিয়ের অনুষ্ঠানের বাকি সময়',
+
+      'venue.heading': 'কীভাবে যাবেন',
+      'venue.intro': 'অনুষ্ঠানটি অনুষ্ঠিত হবে ঢাকার গুলশানের প্রাণকেন্দ্রে।',
+      'venue.mapCta': 'গুগল ম্যাপে খুলুন',
+      'venue.mapTitle': 'ভেন্যুর ম্যাপ',
+
+      'share.button': 'আমন্ত্রণটি শেয়ার করুন',
+      'share.copy': 'লিংক কপি করুন',
+      'share.copied': 'লিংক কপি হয়েছে!',
+      'share.whatsapp': 'হোয়াটসঅ্যাপ',
+      'share.messenger': 'মেসেঞ্জার',
+      'share.telegram': 'টেলিগ্রাম',
+      'share.email': 'ইমেইল',
+
+      'rsvp.heading': 'আপনি কি আসছেন?',
+      'rsvp.nameLabel': 'আপনার নাম',
+      'rsvp.namePlaceholder': 'পূর্ণ নাম',
+      'rsvp.attendLabel': 'আপনি কি আসবেন?',
+      'rsvp.accept': 'আসছি, ইন শা আল্লাহ',
+      'rsvp.decline': 'আসতে পারব না',
+      'rsvp.guestsLabel': 'অতিথির সংখ্যা',
+      'rsvp.g1': '১ জন',
+      'rsvp.g2': '২ জন',
+      'rsvp.g3': '৩ জন',
+      'rsvp.g4': '৪ বা তার বেশি',
+      'rsvp.noteLabel': 'আমাদের জন্য কিছু বলতে চান (ঐচ্ছিক)',
+      'rsvp.notePlaceholder': 'শুভেচ্ছা, খাবারের বিশেষ চাহিদা বা প্রশ্ন…',
+      'rsvp.submit': 'হোয়াটসঅ্যাপে পাঠান',
+      'rsvp.errorName': 'অনুগ্রহ করে আপনার নাম লিখুন',
+      'rsvp.successMessage': 'ধন্যবাদ — আপনার উত্তরটি আমরা পেয়েছি।',
+      'rsvp.sentMessage': 'আপনার উত্তরসহ WhatsApp খোলা হয়েছে — পাঠাতে Send চাপুন।',
+
+      'closing.heading': 'আন্তরিক কৃতজ্ঞতা',
+
+      'footer.instagram': 'ইনস্টাগ্রামে স্পন্দোরা ইনভাইটস',
+      'footer.facebook': 'ফেসবুকে স্পন্দোরা ইনভাইটস',
+    },
   },
 }
 
 export { INVITE_CONFIG, INVITE_TRANSLATIONS }
 
-/* ── Invite platform hook — identical in every template ────────────────────
-   Publish:  the platform writes window.__INVITE_CONFIG__ before this file runs.
-   Preview:  the editor passes #cfg=<url-encoded json>.
-   Editing config.js by hand still works; this only overrides what it is given. */
-(function (target) {
-  if (!target || typeof window === "undefined") return;
+/* ── Invite platform hook v2 — identical in every template ─────────────────
+   Publish:  the platform writes window.__INVITE_CONFIG__ and
+             window.__INVITE_TRANSLATIONS__ before this file runs.
+   Preview:  the editor passes #cfg=<url-encoded {config, translations}>.
+   Editing config.js by hand still works; this only replaces what it is given. */
+(function (target, translations) {
+  if (typeof window === "undefined") return;
   var patch = window.__INVITE_CONFIG__;
+  var tr = window.__INVITE_TRANSLATIONS__;
   if (!patch) {
     var m = /#cfg=(.*)$/.exec(location.hash);
-    try { patch = m ? JSON.parse(decodeURIComponent(m[1])) : null; } catch (e) { patch = null; }
+    try {
+      var payload = m ? JSON.parse(decodeURIComponent(m[1])) : null;
+      if (payload) { patch = payload.config; tr = payload.translations; }
+    } catch (e) { patch = null; }
   }
-  if (patch) Object.keys(patch).forEach(function (k) { target[k] = patch[k]; });
+  function replace(dst, src) {
+    if (!dst || !src) return;
+    Object.keys(dst).forEach(function (k) { delete dst[k]; });
+    Object.keys(src).forEach(function (k) { dst[k] = src[k]; });
+  }
+  replace(target, patch);
+  replace(translations, tr);
 })(typeof INVITE_CONFIG !== "undefined" ? INVITE_CONFIG :
-   typeof config !== "undefined" ? config : null);
+   typeof config !== "undefined" ? config : null,
+   typeof INVITE_TRANSLATIONS !== "undefined" ? INVITE_TRANSLATIONS : null);
