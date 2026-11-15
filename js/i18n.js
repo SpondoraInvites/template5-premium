@@ -34,6 +34,8 @@ export function enFromConfig(cfg) {
     'hero.invite': 'joyfully invite you to celebrate their wedding',
     'hero.name1': cfg.couple.name1,
     'hero.name2': cfg.couple.name2,
+    'hero.parents1': cfg.welcome.parents1,
+    'hero.parents2': cfg.welcome.parents2,
     'hero.dateNote': 'Save the date',
     'scroll.cue': 'Scroll',
 

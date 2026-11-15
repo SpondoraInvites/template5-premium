@@ -50,6 +50,11 @@ test('countdown unit labels exist and are localized in every locale', () => {
   }
 })
 
+test('both family lines are filled in', () => {
+  assert.ok(INVITE_CONFIG.welcome.parents1.trim())
+  assert.ok(INVITE_CONFIG.welcome.parents2.trim())
+})
+
 test('audio is wired: enabled, pointing at the shipped track, provenance retained', () => {
   assert.equal(INVITE_CONFIG.music.enabled, true)
   assert.match(INVITE_CONFIG.music.src, /^assets\/audio\/.*\.mp3$/)

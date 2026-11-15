@@ -401,6 +401,14 @@ html.js .locale-toggle { display: flex; }
   color: var(--royal);
 }
 
+/* The couple's family lines sit directly under the names — a quiet
+   supporting line, one step smaller than the invitation line. */
+.hero-parents {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--royal);
+}
+
 .hero-names {
   margin: 0.05em 0;
   font-weight: 500;

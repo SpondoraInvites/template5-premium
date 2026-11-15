@@ -27,6 +27,9 @@ const INVITE_CONFIG = {
   /* ── Families / welcome ─────────────────────────────────────────────────── */
   welcome: {
     eyebrow: 'With the blessings of their families',
+    // The couple's two family lines — editable in the invite editor.
+    parents1: 'Daughter of Mr. Rafiq Rahman & Mrs. Nasrin Rahman',
+    parents2: 'Son of Mr. Kamal Karim & Mrs. Shirin Karim',
     // Qur'an verse, then the invitation line. Two paragraphs split on a blank
     // line: the first renders as the blockquote, the rest below it.
     inviteLine:
@@ -159,6 +162,8 @@ const INVITE_TRANSLATIONS = {
     'hero.invite': 'আপনাদের বিয়ের অনুষ্ঠানে সাদরে আমন্ত্রণ জানাচ্ছি',
     'hero.name1': 'আয়েশা রহমান',
     'hero.name2': 'ইমরান করিম',
+    'hero.parents1': 'মি. রফিক রহমান ও মিসেস নাসরিন রহমানের কন্যা',
+    'hero.parents2': 'মি. কামাল করিম ও মিসেস শিরিন করিমের পুত্র',
     'hero.dateNote': 'তারিখ মনে রাখুন',
     'scroll.cue': 'স্ক্রল করুন',
 
